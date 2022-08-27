@@ -1,0 +1,38 @@
+# ignore everything
+*
+
+# exceptions:
+!/.github/
+!/.github/**
+
+# /carla
+!carla/
+!carla/**
+carla/carla-simulator
+
+# /logs
+!logs/
+!logs/**
+logs/realdata
+
+# /openpilot
+!openpilot/
+!openpilot/**
+openpilot/.openpilot_dev_env1.sh
+
+# /setup
+!setup/
+!setup/**
+setup/config
+
+# /
+!.editorconfig
+!.gitattributes
+!.gitignore
+!.gitmodules
+!LICENSE
+!Pipfile
+!Pipfile.lock
+!README.md
+!start_all.sh
+!todo.txt

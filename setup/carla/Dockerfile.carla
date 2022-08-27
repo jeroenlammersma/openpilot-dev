@@ -1,0 +1,26 @@
+ARG VERSION
+FROM carlasim/carla:${VERSION}
+
+ARG URL_ADDITIONAL_MAPS
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+USER root
+
+RUN apt-get install -y --no-install-recommends \
+    apt-utils \
+    wget \
+  && rm -rf /var/lib/apt/lists/*
+
+# update key for https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 InRelease
+RUN rm /etc/apt/sources.list.d/cuda.list && \
+    wget -nv https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb && \
+    dpkg -i cuda-keyring_1.0-1_all.deb
+
+USER carla
+
+# download and import additional assets
+WORKDIR /home/carla/Import
+RUN wget -nv ${URL_ADDITIONAL_MAPS}
+WORKDIR /home/carla
+RUN ./ImportAssets.sh > /dev/null

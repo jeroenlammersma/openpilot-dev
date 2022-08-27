@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+py-trees = "==0.8.3"
+networkx = "==2.2"
+shapely = "==1.7.1"
+psutil = "*"
+xmlschema = "==1.0.18"
+ephem = "*"
+tabulate = "*"
+opencv-python = "==4.2.0.32"
+numpy = "*"
+matplotlib = "*"
+six = "*"
+simple-watchdog-timer = "*"
+carla = "==0.9.13"
+pygame = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

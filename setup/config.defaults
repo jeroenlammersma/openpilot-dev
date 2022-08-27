@@ -1,0 +1,8 @@
+# openpilot
+OPENPILOT_ROOT=~/ # ~/ is recommended
+OPENPILOT_REPO_OWNER="jeroenlammersma"
+OPENPILOT_REPO_NAME="openpilot"
+OPENPILOT_REPO_BRANCH="" # keep empty for default branch
+
+# CARLA
+CARLA_VERSION="0.9.13"

@@ -1,0 +1,3 @@
+[submodule "carla/scenario_runner"]
+	path = carla/scenario_runner
+	url = https://github.com/jeroenlammersma/scenario_runner

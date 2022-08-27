@@ -1,0 +1,43 @@
+name: build carla
+on:
+  workflow_dispatch:
+
+env:
+  DOCKER_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  DOCKER_LOGIN: docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+  VERSION: 0.9.12
+  URL_ADDITIONAL_MAPS: https://carla-releases.s3.eu-west-3.amazonaws.com/Linux/AdditionalMaps_$VERSION.tar.gz
+
+jobs:
+  build_carla:
+    name: build & push image
+    runs-on: ubuntu-20.04
+    timeout-minutes: 50
+    env:
+      IMAGE_NAME: carla-complete
+      DOCKER_FILE: setup/carla/Dockerfile.carla
+    if: github.repository == '${{ github.repository_owner }}/openpilot-dev'
+    steps:
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+      - uses: actions/checkout@v3
+      - name: Pull carla image
+        run: docker pull $DOCKER_REGISTRY/$IMAGE_NAME:$VERSION || true
+      - name: Build carla image
+        run: |
+          docker build --cache-from $DOCKER_REGISTRY/$IMAGE_NAME:$VERSION \
+                       --build-arg VERSION=$VERSION \
+                       --build-arg URL_ADDITIONAL_MAPS=${{ env.URL_ADDITIONAL_MAPS }} \
+                       -t $DOCKER_REGISTRY/$IMAGE_NAME:$VERSION \
+                       -t $DOCKER_REGISTRY/$IMAGE_NAME:latest \
+                       -f $DOCKER_FILE .
+      - name: Push to container registry
+        if: github.ref == 'refs/heads/master' && github.repository == '${{ github.repository_owner }}'
+        run: |
+          $DOCKER_LOGIN
+          docker push $DOCKER_REGISTRY/$IMAGE_NAME:$VERSION
+          docker push $DOCKER_REGISTRY/$IMAGE_NAME:latest
