@@ -72,7 +72,7 @@ if [ -z "$TEST_MODE" ] && ! is_wsl; then
 fi
 
 # clear screen if possible
-if ! clear > /dev/null 2>&1; then :; fi
+clear 2> /dev/null || :
 
 print_header
 check_default_openpilot_path
