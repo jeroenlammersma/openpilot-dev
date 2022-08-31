@@ -10,7 +10,7 @@ What is openpilot-dev?
 System Requirements
 ------
 
-openpilot-dev is developed for **Ubuntu 20.04**, sticking to the same [system requirements of openpilot](https://github.com/commaai/openpilot/tree/master/tools#system-requirements). It may, however, also work on macOS, but this is untested. For the best experience, stick to Ubuntu 20.04, otherwise openpilot and the tools should work with minimal to no modifications on macOS and other Linux systems.
+openpilot-dev is developed for **Ubuntu 20.04**, thereby aligning it with the same [system requirements](https://github.com/commaai/openpilot/tree/master/tools#system-requirements) as openpilot. It may, however, also work on macOS, but this is untested. For the best experience, stick to Ubuntu 20.04, otherwise openpilot and the tools should work with minimal to no modifications on macOS and other Linux systems.
 
 
 Setup the environment
