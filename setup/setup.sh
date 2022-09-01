@@ -121,15 +121,15 @@ if [ -n "$DO_DEV_TOOLS_INSTALL" ]; then
   ((_n_tasks+=1))
 fi
 
-# setup openpilot
-if [ -n "$DO_OPENPILOT_SETUP" ]; then
-  source "$SETUP_DIR/openpilot/openpilot_setup.sh"
-  ((_n_tasks+=1))
-fi
-
 # setup CARLA
 if [ -n "$DO_CARLA_SETUP" ]; then
   source "$SETUP_DIR/carla/carla_setup.sh"
+  ((_n_tasks+=1))
+fi
+
+# setup openpilot
+if [ -n "$DO_OPENPILOT_SETUP" ]; then
+  source "$SETUP_DIR/openpilot/openpilot_setup.sh"
   ((_n_tasks+=1))
 fi
 

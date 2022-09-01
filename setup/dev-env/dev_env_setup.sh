@@ -48,7 +48,10 @@ function setup_dev_environment() {
 
   # add openpilot dev env to .bashrc
   if [ -z "$OPENPILOT_DEV_ENV" ]; then
-    printf '\nsource %s' "$ROOT/openpilot/.openpilot_dev_env.sh" >> ~/.bashrc
+    {
+      printf '\n%s' '# openpilot environment(s)'
+      printf '\n%s' "source $ROOT/openpilot/.openpilot_dev_env.sh"
+    } >> ~/.bashrc
     source ~/.bashrc
     echo "Added openpilot_dev_env to bashrc"
     sleep 1
