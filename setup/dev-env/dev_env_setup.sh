@@ -7,6 +7,10 @@ function create_file() {
 }
 
 function setup_dev_environment() {
+  if ! command -v "pipenv" > /dev/null 2>&1; then
+    sudo apt-get install pipenv
+  fi
+
   source ~/.bashrc
   local -r env1="$ROOT/openpilot/.openpilot_dev_env1.sh"
 
