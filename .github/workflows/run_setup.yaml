@@ -96,12 +96,12 @@ jobs:
     - name: Declare openpilot commit-hash
       id: commit-hash
       run: echo "::set-output name=hash::$(read hash ref <<< $(git ls-remote https://github.com/jeroenlammersma/openpilot HEAD) && echo $hash)"
-    - name: Cache openpilot
-      id: cache-openpilot
-      uses: actions/cache@v3
-      with:
-        path: ~/openpilot
-        key: ${{ runner.os }}-cache-${{ env.CACHE_VERSION }}-openpilot-${{ steps.commit-hash.outputs.hash }}
+    # - name: Cache openpilot
+    #   id: cache-openpilot
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: ~/openpilot
+    #     key: ${{ runner.os }}-cache-${{ env.CACHE_VERSION }}-openpilot-${{ steps.commit-hash.outputs.hash }}
     - name: Run setup with openpilot flag
       run: ${{ env.RUN }} --openpilot
 
