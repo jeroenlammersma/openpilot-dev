@@ -35,7 +35,7 @@ cd "$OPENPILOT_PATH"
 if ! tools/ubuntu_setup.sh; then
   source ~/.bashrc
   cd "$OPENPILOT_PATH"
-  tool/ubuntu_setup.sh
+  tools/ubuntu_setup.sh
 fi
 print_done
 
