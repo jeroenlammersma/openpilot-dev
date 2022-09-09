@@ -33,7 +33,8 @@ if [ -n "$OPENPILOT_ENV" ] || [ -d "$HOME/.pyenv" ]; then
 fi
 cd "$OPENPILOT_PATH"
 if ! tools/ubuntu_setup.sh; then
-  . ~/.bashrc
+  unset PYENV_ROOT
+  source ~/.pyenvrc
   cd "$OPENPILOT_PATH"
   tools/ubuntu_setup.sh
 fi
