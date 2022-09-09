@@ -34,7 +34,7 @@ fi
 cd "$OPENPILOT_PATH"
 if ! tools/ubuntu_setup.sh; then
   unset PYENV_ROOT
-  source ~/.pyenvrc
+  eval "$(cat ~/.pyenvrc)"
   cd "$OPENPILOT_PATH"
   tools/ubuntu_setup.sh
 fi
