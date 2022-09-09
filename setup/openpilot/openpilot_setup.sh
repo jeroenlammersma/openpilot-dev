@@ -6,10 +6,8 @@ print_title "OPENPILOT"
 print_start "Setting up $OPENPILOT_REPO_OWNER/$OPENPILOT_REPO_NAME repository"
 if [ ! -d "$OPENPILOT_PATH" ]
 then
-  args=()
-  if [ -n "$OPENPILOT_REPO_BRANCH" ]; then args+=("-b $OPENPILOT_REPO_BRANCH"); fi
-  git clone "https://github.com/$OPENPILOT_REPO_OWNER/$OPENPILOT_REPO_NAME.git" \
-            "$OPENPILOT_PATH" --recurse-submodules -j"$(nproc)" \
+  git clone "https://github.com/$OPENPILOT_REPO_OWNER/$OPENPILOT_REPO_NAME.git" "$OPENPILOT_PATH" \
+            --recurse-submodules -j"$(nproc)" \
             ${OPENPILOT_REPO_BRANCH:+--branch "$OPENPILOT_REPO_BRANCH"}
 else
   echo "Pulling latest changes..."
