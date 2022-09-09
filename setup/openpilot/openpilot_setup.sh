@@ -34,6 +34,7 @@ fi
 cd "$OPENPILOT_PATH"
 if ! tools/ubuntu_setup.sh; then
   source ~/.bashrc
+  rm -rf ~/.pyenv
   cd "$OPENPILOT_PATH"
   tools/ubuntu_setup.sh
 fi
