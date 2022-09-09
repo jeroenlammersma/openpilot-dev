@@ -63,7 +63,7 @@ function setup_pipenv() {
   # cd "$ROOT" && pipenv run python3 "$scratch/get-pip.py" > /dev/null
 
   # pipenv run "pip install --upgrade setuptools"
-  pipenv run "python3 -m pip install --upgerade pip setuptools"
+  pipenv run "python3 -m pip install --upgrade pip setuptools"
 
   echo "Installing pip packages..."
   pipenv install --dev
