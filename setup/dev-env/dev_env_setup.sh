@@ -11,7 +11,6 @@ function setup_dev_environment() {
     sudo apt-get install pipenv
   fi
 
-  source ~/.bashrc
   local -r env1="$ROOT/openpilot/.openpilot_dev_env1.sh"
 
   if [ -f "$env1" ]; then
@@ -52,11 +51,7 @@ function setup_dev_environment() {
 
   # add openpilot dev env to .bashrc
   if [ -z "$OPENPILOT_DEV_ENV" ]; then
-    {
-      printf '\n%s' '# openpilot environment(s)'
-      printf '\n%s' "source $ROOT/openpilot/.openpilot_dev_env.sh"
-    } >> ~/.bashrc
-    source ~/.bashrc
+    printf '\n%s' "source $ROOT/openpilot/.openpilot_dev_env.sh" >> ~/.bashrc
     echo "Added openpilot_dev_env to bashrc"
     sleep 1
   fi

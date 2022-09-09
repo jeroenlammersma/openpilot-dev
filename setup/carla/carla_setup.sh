@@ -15,7 +15,6 @@ function setup_carla() {
   # add carla env to .bashrc
   if [ -z "$CARLA_ENV" ]; then
     printf '\nsource %s' "$ROOT/carla/.carla_env.sh" >> ~/.bashrc
-    source ~/.bashrc
     echo "Added carla_env to bashrc"
     sleep 1
   fi

@@ -25,7 +25,6 @@ trap egress EXIT
 SETUP_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 ROOT="$(cd "$SETUP_DIR"/../ && pwd)"
 
-source ~/.bashrc
 # load default config
 source "$SETUP_DIR/config.defaults"
 # load custom config, if exists
@@ -115,12 +114,6 @@ if [ -n "$DO_DEV_TOOLS_INSTALL" ]; then
   ((_n_tasks+=1))
 fi
 
-# setup CARLA
-if [ -n "$DO_CARLA_SETUP" ]; then
-  source "$SETUP_DIR/carla/carla_setup.sh"
-  ((_n_tasks+=1))
-fi
-
 # setup openpilot
 if [ -n "$DO_OPENPILOT_SETUP" ]; then
   source "$SETUP_DIR/openpilot/openpilot_setup.sh"
@@ -130,6 +123,12 @@ fi
 # setup dev env
 if [ -n "$DO_DEV_ENV_SETUP" ]; then
   source "$SETUP_DIR/dev-env/dev_env_setup.sh"
+  ((_n_tasks+=1))
+fi
+
+# setup CARLA
+if [ -n "$DO_CARLA_SETUP" ]; then
+  source "$SETUP_DIR/carla/carla_setup.sh"
   ((_n_tasks+=1))
 fi
 
