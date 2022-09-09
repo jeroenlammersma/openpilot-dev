@@ -7,10 +7,12 @@ function create_file() {
 }
 
 function setup_dev_environment() {
-  if ! command -v "pipenv" > /dev/null 2>&1; then
-    echo "Installing pipenv..."
-    sudo apt-get install pipenv
-  fi
+  # if ! command -v "pipenv" > /dev/null 2>&1; then
+  #   echo "Installing pipenv..."
+  #   sudo apt-get install pipenv
+  # fi
+  sudo apt-get install pipenv
+
 
   local -r env1="$ROOT/openpilot/.openpilot_dev_env1.sh"
 
