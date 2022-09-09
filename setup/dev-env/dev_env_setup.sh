@@ -57,7 +57,12 @@ function setup_dev_environment() {
 }
 
 function setup_pipenv() {
-  # echo "Configuring pip..."
+  # ensure pip is working correctly by re-installing it
+  echo "Configuring pip..."
+  curl -s https://bootstrap.pypa.io/get-pip.py -o "$scratch/get-pip.py"
+  cd "$ROOT" && pipenv run python3 "$scratch/get-pip.py" > /dev/null
+
+  pipenv run "pip isntall --upgrade setuptools"
 
   echo "Installing pip packages..."
   pipenv install --dev
