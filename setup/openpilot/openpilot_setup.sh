@@ -21,21 +21,23 @@ print_done
 # setup openpilot environment
 print_start "Setting up openpilot environment"
 obtain_sudo
-if [ -n "$OPENPILOT_ENV" ] || [ -d "$HOME/.pyenv" ]; then
-  yellowprint "Active openpilot environment detected..."
+
+if ! command -v "pyenv" > /dev/null 2>&1 && [ -d "$HOME/.pyenv" ]; then
+  yellowprint "pyenv directory detected..."
   echo "$HOME/.pyenv"
   sleep 1
   rm -rf "$HOME/.pyenv"
-  cyanprint "Environment deleted."
+  cyanprint "Directory deleted."
   sleep 1
   echo "Continuing setup..."
   sleep 1
 fi
+
 cd "$OPENPILOT_PATH"
-if ! tools/ubuntu_setup.sh; then
-  source ~/.pyenvrc
+if ! tools/ubuntu_setup.sh; then  # first install pyenv... it will return with exit code 1
+  source ~/.pyenvrc               # reload pyenvrc
   cd "$OPENPILOT_PATH"
-  tools/ubuntu_setup.sh
+  tools/ubuntu_setup.sh           # then run ubuntu setup again to continue setup.
 fi
 print_done
 
