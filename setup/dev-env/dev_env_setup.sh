@@ -11,7 +11,7 @@ function setup_dev_environment() {
   #   echo "Installing pipenv..."
   #   sudo apt-get install pipenv
   # fi
-  sudo apt-get install pipenv
+  sudo apt-get install pipenv -y
 
 
   local -r env1="$ROOT/openpilot/.openpilot_dev_env1.sh"
