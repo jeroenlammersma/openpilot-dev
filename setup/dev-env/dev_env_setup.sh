@@ -8,6 +8,7 @@ function create_file() {
 
 function setup_dev_environment() {
   if ! command -v "pipenv" > /dev/null 2>&1; then
+    echo "Installing pipenv..."
     sudo apt-get install pipenv
   fi
 
