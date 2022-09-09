@@ -58,7 +58,9 @@ function setup_dev_environment() {
 
 function setup_pipenv() {
   echo "Configuring pip..."
-  pipenv run "pip install --upgrade pip setuptools"
+  pipenv run "pip install --upgrade pip"
+  pipenv run "pip install --upgrade setuptools"
+
   echo "Installing pip packages..."
   pipenv install --dev
 }
