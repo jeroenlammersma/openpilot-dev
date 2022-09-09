@@ -32,7 +32,10 @@ if [ -n "$OPENPILOT_ENV" ] || [ -d "$HOME/.pyenv" ]; then
   sleep 1
 fi
 cd "$OPENPILOT_PATH"
-tools/ubuntu_setup.sh
+if ! tools/ubuntu_setup.sh; then
+  source ~/.bashrc
+  tool/ubuntu_setup.sh
+fi
 print_done
 
 # build openpilot
