@@ -1,6 +1,9 @@
 #!/bin/bash
 
 function setup_vscode() {
+  # wsl has automatic installer when running code command for the first time
+  if [ -n "$WSL_ENV" ]; then return; fi
+
   if command -v "code" > /dev/null 2>&1; then
     echo "VS Code already installed"
     return
