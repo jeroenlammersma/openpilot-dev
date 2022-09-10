@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function setup_vscode() {
-  if command -v "gh" > /dev/null 2>&1; then
+  if command -v "code" > /dev/null 2>&1; then
     echo "VS Code already installed"
     return
   fi
