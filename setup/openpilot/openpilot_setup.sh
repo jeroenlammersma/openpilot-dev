@@ -22,7 +22,7 @@ print_done
 print_start "Setting up openpilot environment"
 obtain_sudo
 
-if ! command -v "pyenv" > /dev/null 2>&1 && [ -d "$HOME/.pyenv" ]; then
+if [ -d "$HOME/.pyenv" ]; then
   yellowprint "pyenv directory detected..."
   echo "$HOME/.pyenv"
   sleep 1
