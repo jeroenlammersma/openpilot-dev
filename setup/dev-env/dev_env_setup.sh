@@ -7,7 +7,9 @@ function create_file() {
 }
 
 function setup_dev_environment() {
-  source ~/.bashrc
+  sudo apt-get install pipenv -y
+
+
   local -r env1="$ROOT/openpilot/.openpilot_dev_env1.sh"
 
   if [ -f "$env1" ]; then
@@ -48,8 +50,7 @@ function setup_dev_environment() {
 
   # add openpilot dev env to .bashrc
   if [ -z "$OPENPILOT_DEV_ENV" ]; then
-    printf '\nsource %s' "$ROOT/openpilot/.openpilot_dev_env.sh" >> ~/.bashrc
-    source ~/.bashrc
+    printf '\n%s' "source $ROOT/openpilot/.openpilot_dev_env.sh" >> ~/.bashrc
     echo "Added openpilot_dev_env to bashrc"
     sleep 1
   fi
@@ -60,6 +61,7 @@ function setup_pipenv() {
   echo "Configuring pip..."
   curl -s https://bootstrap.pypa.io/get-pip.py -o "$scratch/get-pip.py"
   cd "$ROOT" && pipenv run python3 "$scratch/get-pip.py" > /dev/null
+  pipenv run "pip install --upgrade setuptools"
 
   echo "Installing pip packages..."
   pipenv install --dev

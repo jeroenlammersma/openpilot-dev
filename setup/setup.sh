@@ -25,7 +25,6 @@ trap egress EXIT
 SETUP_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 ROOT="$(cd "$SETUP_DIR"/../ && pwd)"
 
-source ~/.bashrc
 # load default config
 source "$SETUP_DIR/config.defaults"
 # load custom config, if exists
@@ -102,14 +101,14 @@ sudo apt-get update
 if [ -z "$TEST_MODE" ]; then
   sudo apt-get upgrade -y
 fi
-sudo apt-get install -y curl git pipenv scons
+sudo apt-get install -y curl git scons
 print_done 1
 
 
 # start tasks
 _n_tasks=0
 
-# setup  dev env
+# setup dev env
 if [ -n "$DO_DEV_ENV_SETUP" ]; then
   source "$SETUP_DIR/dev-env/dev_env_setup.sh"
   ((_n_tasks+=1))
@@ -121,15 +120,15 @@ if [ -n "$DO_DEV_TOOLS_INSTALL" ]; then
   ((_n_tasks+=1))
 fi
 
-# setup openpilot
-if [ -n "$DO_OPENPILOT_SETUP" ]; then
-  source "$SETUP_DIR/openpilot/openpilot_setup.sh"
-  ((_n_tasks+=1))
-fi
-
 # setup CARLA
 if [ -n "$DO_CARLA_SETUP" ]; then
   source "$SETUP_DIR/carla/carla_setup.sh"
+  ((_n_tasks+=1))
+fi
+
+# setup openpilot
+if [ -n "$DO_OPENPILOT_SETUP" ]; then
+  source "$SETUP_DIR/openpilot/openpilot_setup.sh"
   ((_n_tasks+=1))
 fi
 
