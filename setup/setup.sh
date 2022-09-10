@@ -108,27 +108,27 @@ print_done 1
 # start tasks
 _n_tasks=0
 
-# install dev tools
-if [ -n "$DO_DEV_TOOLS_INSTALL" ]; then
-  source "$SETUP_DIR/tools/tools_install.sh"
-  ((_n_tasks+=1))
-fi
-
-# setup openpilot
-if [ -n "$DO_OPENPILOT_SETUP" ]; then
-  source "$SETUP_DIR/openpilot/openpilot_setup.sh"
-  ((_n_tasks+=1))
-fi
-
 # setup dev env
 if [ -n "$DO_DEV_ENV_SETUP" ]; then
   source "$SETUP_DIR/dev-env/dev_env_setup.sh"
   ((_n_tasks+=1))
 fi
 
+# install dev tools
+if [ -n "$DO_DEV_TOOLS_INSTALL" ]; then
+  source "$SETUP_DIR/tools/tools_install.sh"
+  ((_n_tasks+=1))
+fi
+
 # setup CARLA
 if [ -n "$DO_CARLA_SETUP" ]; then
   source "$SETUP_DIR/carla/carla_setup.sh"
+  ((_n_tasks+=1))
+fi
+
+# setup openpilot
+if [ -n "$DO_OPENPILOT_SETUP" ]; then
+  source "$SETUP_DIR/openpilot/openpilot_setup.sh"
   ((_n_tasks+=1))
 fi
 
