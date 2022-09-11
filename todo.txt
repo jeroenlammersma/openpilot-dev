@@ -1,20 +1,10 @@
-Nieuwe repo: git lfs install --> https://git-lfs.github.com/
-
-chmod +x scipts die nodig zijn.
-
-Update README.md
--> instructie geven voor config (override config.defaults)
-- maak file /setup/conf aan
-- zet hier vars in die overschreven moeten worden (zoals OPENPILOT_REPO_ROOT)
-
+### CI ##
 verbeter build carla action
 - plaats bepaalde acties in workflow, zoals:
   - apt-get install ...
   - curl additional_maps
 
-pre-commit hooks implementeren ?
-
-##########################################################
+pre-commit hooks implementeren? (zie openpilot repo als voorbeeld)
 
 
 ### SETUP ##
@@ -30,7 +20,6 @@ Skip nvidia install als install/ubuntu-drivers devices of andere errors zijn voo
 + andere setups net zo
 --> misschien met een trap EXIT?
 
-Keep header on top ?
 keep screen awake during setup ?
 
 verbose flag
@@ -42,28 +31,37 @@ verbose flag
 ### CARLA ##
 scenario_runner:
 - run_scenario: start carla, start bridge met juiste town, launch openpilot en scenario zelf natuurlijk?
-- run_scenario interactief? met pijltjes scenario kiezen
+- run_scenario: interactief? met pijltjes scenario kiezen
 
 
 ### start_all.sh ##
 script om 4 terminals te openen
 - CarlaUE4.sh -renderOfScreen
-- cd tools/sim {zet ./launc_openpilot} klaar
+- cd tools/sim {zet ./launch_openpilot} klaar
 - cd tools/sim {zet ./bridge} klaar
 - pipenv shell dev-env en {zet scenario_runner} klaar
 
 
 ### LOGS ##
 scripts plotjuggler:
-- Laad laatste log file in (let op segments)
+- Laad laatste log file in (let op segments) -> script afmaken
 - Geef lijst en kies log file (let op segments)
 - stream tijdens runnen simulator
 
-### README ##
-Update de README.md
+
+### READMEs ##
+readme.md toevoegen aan subdirectories? Bevatten dan instructies voor dat onderdeel
+- carla
+- logs
+- openpilot
+- setup
+
+
+### /README.md ##
+instructie geven voor config (override config.defaults)
 
 MOK instructies README
---> of print tijdens script wifi drivers, yellowprint, dat de keys ge-enrolled moeten worden
+--> of print tijdens script wifi drivers, dat de keys ge-enrolled moeten worden
 
 - What is MOK?
     - MOK (Machine Owner Key) is about securing the boot process by only allowing approved OS components and drivers to run.

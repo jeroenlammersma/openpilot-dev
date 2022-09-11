@@ -34,6 +34,17 @@ setup/setup.sh
 This wil start an interactive shell which will guide you through the setup.
 
 
+Custom configuration
+------
+
+The setup will load [config.defaults](https://github.com/jeroenlammersma/openpilot-dev/blob/master/setup/config.defaults) as default configuration. This will set variables for openpilot (such as the repository) and CARLA version. To override the default configuration, create a file 'config' in the setup directory. Best is to copy config.default:
+``` bash
+cd setup
+cp config.default config
+```
+Now edit the config file. It is possible to only add the variables you want to override in this file, because before checking for a custom config and overriding variables, the default configuration will always be loaded anyway.
+
+
 Directory Structure
 ------
     .
