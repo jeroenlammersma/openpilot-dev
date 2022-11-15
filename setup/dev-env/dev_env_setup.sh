@@ -28,6 +28,8 @@ if [ -z "\$PYENV_ROOT" ]; then
   eval "\$(pyenv virtualenv-init -)"
 fi
 EOF
+
+
   fi
   source $RC_FILE
 
@@ -117,6 +119,7 @@ print_title "OPENPILOT-DEV ENVIRONMENT"
 print_start "Setting up poetry"
 if ! setup_poetry; then  # poetry setup exits if pyenv was not installed (now installed)
   source ~/.pyenvrc      # reload pyenvrc
+  PATH="$HOME/.pyenv/bin:$PATH"
   setup_poetry           # run poetry setup again to continue setup
 fi
 print_done
