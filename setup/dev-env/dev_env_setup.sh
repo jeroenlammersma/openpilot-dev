@@ -6,8 +6,10 @@ function create_file() {
   cyanprint "$2"
 }
 
-function install_dependencies() {
-  sudo apt install \
+function install_pyenv_dependencies() {
+  echo "Installing dependencies needed for pyenv..."
+
+  sudo apt-get install \
     build-essential \
     curl \
     libbz2-dev \
@@ -29,6 +31,7 @@ function install_dependencies() {
 
 function setup_poetry() {
   check_for_existing_pyenv_root
+  install_pyenv_dependencies
   cd $OPENPILOT_DEV_PATH
 
   RC_FILE="${HOME}/.$(basename ${SHELL})rc"
