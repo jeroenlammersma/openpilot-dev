@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "./print_helpers.sh"
+
 _esc_code_choice="K"
 
 ### Options Functions ##
@@ -83,10 +85,24 @@ function check_default_openpilot_path() {
   fi
 }
 
+function check_for_existing_pyenv_root() {
+  if ! command -v "pyenv" > /dev/null 2>&1 && [ -d "$HOME/.pyenv" ]; then
+    yellowprint "pyenv directory detected..."
+    echo "$HOME/.pyenv"
+    sleep 1
+    rm -rf "$HOME/.pyenv"
+    cyanprint "Directory deleted."
+    sleep 1
+    echo "Continuing setup..."
+    sleep 1
+  fi
+}
+
 function obtain_sudo() {
   sudo echo "hackish but works" > /dev/null
 }
 
+### Windows Subsystem for Linux
 function is_wsl() {
   kernel=$(uname -r | tr '[:upper:]' '[:lower:]')
   if [[ $kernel == *"microsoft"* ]]; then

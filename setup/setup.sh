@@ -29,8 +29,7 @@ ROOT="$( cd "$SETUP_DIR"/../ && pwd )"
 source "$SETUP_DIR/config.defaults"
 # load custom config, if exists
 if [ -f "$SETUP_DIR/config" ]; then source "$SETUP_DIR/config"; fi
-# load helpers
-source "$SETUP_DIR/lib/print_helpers.sh"
+# load helper functions
 source "$SETUP_DIR/lib/helpers.sh"
 
 # set setup and paths
@@ -101,7 +100,7 @@ sudo apt-get update
 if [ -z "$TEST_MODE" ]; then
   sudo apt-get upgrade -y
 fi
-sudo apt-get install -y curl git scons
+sudo apt-get install -y build-essential curl git scons
 print_done 1
 
 

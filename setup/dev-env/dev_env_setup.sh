@@ -7,6 +7,7 @@ function create_file() {
 }
 
 function setup_poetry() {
+  check_for_existing_pyenv_root
   cd $OPENPILOT_DEV_PATH
 
   RC_FILE="${HOME}/.$(basename ${SHELL})rc"
