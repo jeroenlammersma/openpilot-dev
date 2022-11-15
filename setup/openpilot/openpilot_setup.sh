@@ -34,10 +34,10 @@ if ! command -v "pyenv" > /dev/null 2>&1 && [ -d "$HOME/.pyenv" ]; then
 fi
 
 cd "$OPENPILOT_PATH"
-if ! tools/ubuntu_setup.sh; then  # first install pyenv... it will return with exit code 1
+if ! tools/ubuntu_setup.sh; then  # ubuntu setup exits if pyenv was not installed (now installed)
   source ~/.pyenvrc               # reload pyenvrc
   cd "$OPENPILOT_PATH"
-  tools/ubuntu_setup.sh           # then run ubuntu setup again to continue setup.
+  tools/ubuntu_setup.sh           # run ubuntu setup again to continue setup
 fi
 print_done
 
@@ -45,12 +45,12 @@ print_done
 obtain_sudo
 print_start "Building openpilot"
 cd "$OPENPILOT_PATH"
-pipenv run scons -j"$(nproc)"
+poetry run scons -j"$(nproc)"
 print_done
 
 # install plotjuggler
 print_start "Installing plotjuggler"
-pipenv run tools/plotjuggler/juggle.py --install
+poetry run tools/plotjuggler/juggle.py --install
 print_done
 
 # create symlink to openpilot logs

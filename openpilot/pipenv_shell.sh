@@ -1,5 +1,5 @@
 #!/bin/bash
-# Just an easy way to open pipenv shell in the openpilot project
+# Just an easy way to open a poetry shell in the openpilot project
 
 set -e
 
@@ -10,4 +10,4 @@ validate_openpilot_path
 
 
 cd "$OPENPILOT_PATH"
-pipenv shell
+poetry shell

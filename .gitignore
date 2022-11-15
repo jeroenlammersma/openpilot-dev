@@ -30,9 +30,12 @@ setup/config
 !.gitattributes
 !.gitignore
 !.gitmodules
+!.python-version
 !LICENSE
 !Pipfile
 !Pipfile.lock
+!poetry.lock
+!pyproject.toml
 !README.md
 !start_all.sh
 !todo.txt

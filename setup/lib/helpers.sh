@@ -34,12 +34,12 @@ function request_setup_choices() {
   if request_choice "Setup openpilot?"; then
     DO_OPENPILOT_SETUP=1
   fi
-  if request_choice "Install and setup CARLA simulator? (will also set up openpilot-dev pipenv)"; then
+  if request_choice "Install and setup CARLA simulator? (will also set up openpilot-dev poetry env)"; then
     DO_CARLA_SETUP=1
     DO_DEV_ENV_SETUP=1
-    echo "$(greenboldprint '?') $(whiteboldprint 'Setup openpilot-dev pipenv?') $(greenprint Yes)"
+    echo "$(greenboldprint '?') $(whiteboldprint 'Setup openpilot-dev poetry env?') $(greenprint Yes)"
   fi
-  if [ -z "$DO_DEV_ENV_SETUP" ] && request_choice "Setup openpilot-dev pipenv?"; then
+  if [ -z "$DO_DEV_ENV_SETUP" ] && request_choice "Setup openpilot-dev poetry env?"; then
     DO_DEV_ENV_SETUP=1
   fi
   if request_choice "Install development tools?"; then

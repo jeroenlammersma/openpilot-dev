@@ -6,10 +6,63 @@ function create_file() {
   cyanprint "$2"
 }
 
+function setup_poetry() {
+  cd $OPENPILOT_DEV_PATH
+
+  RC_FILE="${HOME}/.$(basename ${SHELL})rc"
+  if [ "$(uname)" == "Darwin" ] && [ $SHELL == "/bin/bash" ]; then
+    RC_FILE="$HOME/.bash_profile"
+  fi
+
+  if ! command -v "pyenv" > /dev/null 2>&1; then
+    echo "pyenv install ..."
+    curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+
+    echo -e "\n. ~/.pyenvrc" >> $RC_FILE
+    cat <<EOF > "${HOME}/.pyenvrc"
+if [ -z "\$PYENV_ROOT" ]; then
+  export PATH=\$HOME/.pyenv/bin:\$HOME/.pyenv/shims:\$PATH
+  export PYENV_ROOT="\$HOME/.pyenv"
+  eval "\$(pyenv init -)"
+  eval "\$(pyenv virtualenv-init -)"
+fi
+EOF
+  fi
+  source $RC_FILE
+
+  export MAKEFLAGS="-j$(nproc)"
+
+  PYENV_PYTHON_VERSION=$(cat .python-version)
+  if ! pyenv prefix ${PYENV_PYTHON_VERSION} &> /dev/null; then
+    # no pyenv update on mac
+    if [ "$(uname)" == "Linux" ]; then
+      echo "pyenv update ..."
+      pyenv update
+    fi
+    echo "python ${PYENV_PYTHON_VERSION} install ..."
+    CONFIGURE_OPTS="--enable-shared" pyenv install -f ${PYENV_PYTHON_VERSION}
+  fi
+  eval "$(pyenv init --path)"
+
+  echo "update pip"
+  pip install pip==22.3
+  pip install poetry==1.2.2
+
+  poetry config virtualenvs.prefer-active-python true --local
+
+  POETRY_INSTALL_ARGS=""
+  if [ -d "./xx" ]; then
+    echo "WARNING: using xx dependency group, installing globally"
+    poetry config virtualenvs.create false --local
+    POETRY_INSTALL_ARGS="--with xx --sync"
+  fi
+
+  echo "pip packages install..."
+  poetry install --no-cache --no-root $POETRY_INSTALL_ARGS
+  pyenv rehash
+}
+
 function setup_dev_environment() {
-  sudo apt-get install pipenv -y
-
-
   local -r env1="$ROOT/openpilot/.openpilot_dev_env1.sh"
 
   if [ -f "$env1" ]; then
@@ -56,26 +109,18 @@ function setup_dev_environment() {
   fi
 }
 
-function setup_pipenv() {
-  # ensure pip is working correctly by re-installing it
-  echo "Configuring pip..."
-  curl -s https://bootstrap.pypa.io/get-pip.py -o "$scratch/get-pip.py"
-  cd "$ROOT" && pipenv run python3 "$scratch/get-pip.py" > /dev/null
-  pipenv run "pip install --upgrade setuptools"
-
-  echo "Installing pip packages..."
-  pipenv install --dev
-}
-
 
 print_title "OPENPILOT-DEV ENVIRONMENT"
+
+# setup poetry
+print_start "Setting up poetry"
+if ! setup_poetry; then  # poetry setup exits if pyenv was not installed (now installed)
+  source ~/.pyenvrc      # reload pyenvrc
+  setup_poetry           # run poetry setup again to continue setup
+fi
+print_done
 
 # setup openpilot-dev env
 print_start "Setting up environment"
 setup_dev_environment
-print_done
-
-# setup pipenv
-print_start "Setting up pipenv"
-setup_pipenv
 print_done
