@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source "./print_helpers.sh"
-
 _esc_code_choice="K"
 
 ### Options Functions ##

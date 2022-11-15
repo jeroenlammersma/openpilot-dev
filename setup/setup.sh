@@ -31,6 +31,7 @@ source "$SETUP_DIR/config.defaults"
 if [ -f "$SETUP_DIR/config" ]; then source "$SETUP_DIR/config"; fi
 # load helper functions
 source "$SETUP_DIR/lib/helpers.sh"
+source "$SETUP_DIR/lib/print_helpers.sh"
 
 # set setup and paths
 OPENPILOT_SETUP=1
