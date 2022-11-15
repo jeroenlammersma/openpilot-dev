@@ -9,7 +9,7 @@ function create_file() {
 function install_pyenv_dependencies() {
   echo "Installing dependencies needed for pyenv..."
 
-  sudo apt-get install \
+  sudo apt-get -y install \
     build-essential \
     curl \
     libbz2-dev \
