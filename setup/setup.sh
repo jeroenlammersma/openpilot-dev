@@ -108,15 +108,15 @@ print_done 1
 # start tasks
 _n_tasks=0
 
-# setup dev env
-if [ -n "$DO_DEV_ENV_SETUP" ]; then
-  source "$SETUP_DIR/dev-env/dev_env_setup.sh"
-  ((_n_tasks+=1))
-fi
-
 # setup openpilot
 if [ -n "$DO_OPENPILOT_SETUP" ]; then
   source "$SETUP_DIR/openpilot/openpilot_setup.sh"
+  ((_n_tasks+=1))
+fi
+
+# setup dev env
+if [ -n "$DO_DEV_ENV_SETUP" ]; then
+  source "$SETUP_DIR/dev-env/dev_env_setup.sh"
   ((_n_tasks+=1))
 fi
 
