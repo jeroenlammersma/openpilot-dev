@@ -101,7 +101,7 @@ sudo apt-get update
 if [ -z "$TEST_MODE" ]; then
   sudo apt-get upgrade -y
 fi
-sudo apt-get install -y build-essential curl git scons
+sudo apt-get install -y curl git scons
 print_done 1
 
 
