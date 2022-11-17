@@ -5,9 +5,11 @@ function setup_carla() {
   # add repository and install CARLA
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1AF1527DE64CB8D9
   sudo add-apt-repository "deb [arch=amd64] http://dist.carla.org/carla $(lsb_release -sc) main" > /dev/null
-  sudo apt-get update > /dev/null && sudo apt-get --download-only -y "carla-simulator=$CARLA_VERSION"
-  obtain_sudo
-  sudo apt-get install -y "carla-simulator=$CARLA_VERSION"
+  sudo apt-get update > /dev/null && sudo apt-get install -y "carla-simulator=$CARLA_VERSION"
+  
+  #TODO: first download, obtain sudo, then  install
+      # obtain_sudo
+      # sudo apt-get install -y "carla-simulator=$CARLA_VERSION"
 
   # create symlink to CARLA
   ln -sfn "/opt/carla-simulator" "$ROOT/carla/carla-simulator"
