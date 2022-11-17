@@ -45,7 +45,7 @@ sleep 1
 sudo apt-get purge -y 'nvidia*' > /dev/null
 
 # install driver
-sudo apt-get install -y "libnvidia-gl-$recommended" "nvidia-driver-$recommended"
+sudo apt-get install -y "libnvidia-common-$recommended" "libnvidia-gl-$recommended" "nvidia-driver-$recommended"
 
 
 # blacklist the Nouveau driver so it doesn't initialize:
