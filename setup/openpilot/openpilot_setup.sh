@@ -37,13 +37,13 @@ obtain_sudo
 print_start "Building openpilot"
 cd "$OPENPILOT_PATH"
 # poetry run scons -j"$(nproc)"                     # UNCOMMENT IF OPENPILOT UPDATED TO USE POETRY
-poetry run scons -j"$(nproc)"                       # REMOVE IF OPENPILOT UPDATED TO USE POETRY
+pipenv run scons -j"$(nproc)"                       # REMOVE IF OPENPILOT UPDATED TO USE POETRY
 print_done
 
 # install plotjuggler
 print_start "Installing plotjuggler"
 # poetry run tools/plotjuggler/juggle.py --install  # UNCOMMENT IF OPENPILOT UPDATED TO USE POETRY
-poetry run tools/plotjuggler/juggle.py --install    # REMOVE IF OPENPILOT UPDATED TO USE POETRY
+pipenv run tools/plotjuggler/juggle.py --install    # REMOVE IF OPENPILOT UPDATED TO USE POETRY
 print_done
 
 # create symlink to openpilot logs
