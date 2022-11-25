@@ -22,9 +22,10 @@ if [ ! -f "$SCENARIO_RUNNER_ROOT/.git" ]; then
 fi
 
 
-# export PIPENV_PIPFILE="$OPENPILOT_DEV_PATH/Pipfile"
+export PIPENV_PIPFILE="$OPENPILOT_DEV_PATH/Pipfile"                              # REMOVE IF OPENPILOT UPDATED TO USE POETRY
 cd "$SCENARIO_RUNNER_ROOT"
 scenario="$1"
 shift
 
-poetry run python scenario_runner.py --scenario "$scenario" --waitForEgo "$@"
+# poetry run python scenario_runner.py --scenario "$scenario" --waitForEgo "$@"  # UNCOMMENT IF OPENPILOT UPDATED TO USE POETRY
+pipenv run python scenario_runner.py --scenario "$scenario" --waitForEgo "$@"    # REMOVE IF OPENPILOT UPDATED TO USE POETRY

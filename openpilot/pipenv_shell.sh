@@ -10,4 +10,5 @@ validate_openpilot_path
 
 
 cd "$OPENPILOT_PATH"
-poetry shell
+# poetry shell                                    # UNCOMMENT IF OPENPILOT UPDATED TO USE POETRY
+pipenv shell                                    # REMOVE IF OPENPILOT UPDATED TO USE POETRY
