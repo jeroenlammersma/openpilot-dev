@@ -22,7 +22,6 @@ if [ ! -f "$SCENARIO_RUNNER_ROOT/.git" ]; then
 fi
 
 
-export PIPENV_PIPFILE="$OPENPILOT_DEV_PATH/Pipfile"                              # REMOVE IF OPENPILOT UPDATED TO USE POETRY
 cd "$SCENARIO_RUNNER_ROOT"
 scenario="$1"
 shift
