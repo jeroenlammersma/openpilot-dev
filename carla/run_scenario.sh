@@ -27,5 +27,4 @@ cd "$SCENARIO_RUNNER_ROOT"
 scenario="$1"
 shift
 
-# poetry run python scenario_runner.py --scenario "$scenario" --waitForEgo "$@"  # UNCOMMENT IF OPENPILOT UPDATED TO USE POETRY
-pipenv run python scenario_runner.py --scenario "$scenario" --waitForEgo "$@"    # REMOVE IF OPENPILOT UPDATED TO USE POETRY
+poetry run python scenario_runner.py --scenario "$scenario" --waitForEgo "$@"
