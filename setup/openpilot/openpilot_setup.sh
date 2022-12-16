@@ -31,6 +31,9 @@ if ! tools/ubuntu_setup.sh; then  # ubuntu setup exits if pyenv was not installe
   cd "$OPENPILOT_PATH"
   tools/ubuntu_setup.sh           # run ubuntu setup again to continue setup
 fi
+
+source "$OPENPILOT_PATH/tools/openpilot_env.sh"
+
 print_done
 
 # build openpilot
