@@ -12,8 +12,7 @@ The following instructions can be used to set up a openpilot development environ
 You **must** use Ubuntu 20.04.
 
 ## Automatic setup
-Easiest option. Just follow the instructions found [here](https://github.com/jeroenlammersma/openpilot-dev/tree/pipenv-2-poetry#setup-the-environment).
-**IMPORTANT:** use the [pipenv-2-poetry](https://github.com/jeroenlammersma/openpilot-dev/tree/pipenv-2-poetry) branch of this repo when running the setup.
+Easiest option. Just follow the instructions found [here](https://github.com/jeroenlammersma/openpilot-dev#setup-the-environment).
 
 **At the moment** it is recommended to manually install openpilot (see instructions below) and then skip openpilot setup during the interactive setup (when asked for full setup, choose 'no').
 
@@ -37,7 +36,7 @@ tools/ubuntu_setup.sh
 Reload bashrc and activate a shell with the installed Python dependencies:
 ```bash
 source ~/.bashrc
-cd openpilot && pipenv shell
+cd openpilot && poetry shell
 ```
 
 Build openpilot with this command:
@@ -73,7 +72,7 @@ To run CARLA, execute the following:
 <sup>To start CARLA in off-screen mode, add the following flag: `-RenderOffScreen`. See the carla docs about [rendering options](https://carla.readthedocs.io/en/latest/adv_rendering_options/#off-screen-mode) for details.</sup>
 
 ### Update NVIDIA drivers (optional)
-Is, however, recommended. Execute the script found [here](https://github.com/jeroenlammersma/openpilot-dev/blob/pipenv-2-poetry/setup/drivers/nvidia-graphics/autoinstall-recommended.sh), or manually update your drivers.
+Is, however, recommended. Execute the script found [here](https://github.com/jeroenlammersma/openpilot-dev/blob/master/setup/drivers/nvidia-graphics/autoinstall-recommended.sh), or manually update your drivers.
 
 ## (Manually) run openpilot in the simulator
 Make sure CARLA is running. Then, using 2 shells, execute the following:
@@ -81,7 +80,7 @@ Make sure CARLA is running. Then, using 2 shells, execute the following:
 **shell 1**
 ```bash
 cd openpilot
-pipenv shell
+poetry shell
 cd tools/sim
 ./launch_openpilot.sh
 ```
@@ -89,7 +88,7 @@ cd tools/sim
 **shell 2**
 ```bash
 cd openpilot
-pipenv shell
+poetry shell
 cd tools/sim
 ./bridge.py
 ```
