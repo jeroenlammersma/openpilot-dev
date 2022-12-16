@@ -1,7 +1,5 @@
 #!/bin/bash
-# Just an easy way to open a pipenv shell in the openpilot project
-
-# DELETE FILE IF OPENPILOT UPDATED TO USE POETRY
+# Just an easy way to open a poetry shell in the openpilot project
 
 set -e
 
@@ -12,4 +10,4 @@ validate_openpilot_path
 
 
 cd "$OPENPILOT_PATH"
-pipenv shell
+poetry shell

@@ -11,7 +11,7 @@ pre-commit hooks implementeren? (zie openpilot repo als voorbeeld)
 cleanup scripts
 
 launch_openpilot.sh fullscreen?
-- hoe binnen pipenv?
+- hoe met poetry?
 - moet nog gefixt worden met command not found
 - misschien flag toevoegen als je dit wil/niet wil ( wordt wordt de default?)
 - hoe stop je launch_openpilot.sh als het fullscreen gaat?
@@ -39,7 +39,7 @@ script om 4 terminals te openen
 - CarlaUE4.sh -renderOfScreen
 - cd tools/sim {zet ./launch_openpilot} klaar
 - cd tools/sim {zet ./bridge} klaar
-- pipenv shell dev-env en {zet scenario_runner} klaar
+- poetry shell dev-env en {zet scenario_runner} klaar
 
 
 ### LOGS ##

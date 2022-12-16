@@ -37,7 +37,7 @@ function print_usage() {
   whiteboldprint "FLAGS"
   printf "  %s\t\t\t%s\n" "--all" "Do a full setup of the openpilot development environment."
   printf "  %s\t\t%s\n" "--carla" "Setup CARLA simulator and Scenario Runner."
-  printf "  %s\t\t%s\n" "--dev-env" "Set up openpilot development pipenv and some convenient scripts."
+  printf "  %s\t\t%s\n" "--dev-env" "Set up openpilot development poetry env and some convenient scripts."
   printf "  %s\t%s\n" "--nvidia-driver" "Install recommended NVIDIA graphics driver."
   printf "  %s\t\t%s\n" "--openpilot" "Install and set up openpilot."
   printf "  %s\t\t%s\n" "--tools" "Install useful development tools."

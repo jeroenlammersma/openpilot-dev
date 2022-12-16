@@ -14,11 +14,6 @@ env:
     sudo rm -rf "/usr/local/share/boost"
     sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
-  INSTALL_CARLA_FROM_CACHE: sudo dpkg -i -- ~/carla-package/*.deb
-  MOVE_CARLA_TO_CACHE: |
-    mkdir -p ~/carla-package
-    sudo find /var/cache/apt/archives -type f \( -name "carla*" -o -name "libtiff*" \) -exec sudo mv -t ~/carla-package {} \;
-
 jobs:
   run_all:
     name: run all (twice)
@@ -39,24 +34,12 @@ jobs:
       with:
         path: ~/openpilot
         key: ${{ runner.os }}-cache-${{ env.CACHE_VERSION }}-openpilot-${{ steps.commit-hash.outputs.hash }}
-    - name: Cache carla
-      id: cache-carla
-      uses: actions/cache@v3
-      with:
-        path: ~/carla-package
-        key: ${{ runner.os }}-cache-${{ env.CACHE_VERSION }}-package-carla-${{ env.CARLA_VERSION }}
-    - name: Install carla from cache
-      if: steps.cache-carla.outputs.cache-hit == 'true'
-      run: eval "$INSTALL_CARLA_FROM_CACHE"
     - name: Run setup with all flags (1st run)
       run: ${{ env.RUN }} --all
     - name: Reload .bashrc
       run: source ~/.bashrc
     - name: Run setup with all flags (2nd run)
       run: ${{ env.RUN }} --all
-    - name: Move carla to cache
-      if: steps.cache-carla.outputs.cache-hit != 'true'
-      run: eval "$MOVE_CARLA_TO_CACHE"
 
   run_carla:
     name: run carla

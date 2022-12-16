@@ -34,12 +34,12 @@ function request_setup_choices() {
   if request_choice "Setup openpilot?"; then
     DO_OPENPILOT_SETUP=1
   fi
-  if request_choice "Install and setup CARLA simulator? (will also set up openpilot-dev pipenv)"; then
+  if request_choice "Install and setup CARLA simulator? (will also set up openpilot-dev poetry env)"; then
     DO_CARLA_SETUP=1
     DO_DEV_ENV_SETUP=1
-    echo "$(greenboldprint '?') $(whiteboldprint 'Setup openpilot-dev pipenv?') $(greenprint Yes)"
+    echo "$(greenboldprint '?') $(whiteboldprint 'Setup openpilot-dev poetry env?') $(greenprint Yes)"
   fi
-  if [ -z "$DO_DEV_ENV_SETUP" ] && request_choice "Setup openpilot-dev pipenv?"; then
+  if [ -z "$DO_DEV_ENV_SETUP" ] && request_choice "Setup openpilot-dev poetry env?"; then
     DO_DEV_ENV_SETUP=1
   fi
   if request_choice "Install development tools?"; then
@@ -83,10 +83,24 @@ function check_default_openpilot_path() {
   fi
 }
 
+function check_for_existing_pyenv_root() {
+  if ! command -v "pyenv" > /dev/null 2>&1 && [ -d "$HOME/.pyenv" ]; then
+    yellowprint "pyenv directory detected..."
+    echo "$HOME/.pyenv"
+    sleep 1
+    rm -rf "$HOME/.pyenv"
+    cyanprint "Directory deleted."
+    sleep 1
+    echo "Continuing setup..."
+    sleep 1
+  fi
+}
+
 function obtain_sudo() {
   sudo echo "hackish but works" > /dev/null
 }
 
+### Windows Subsystem for Linux
 function is_wsl() {
   kernel=$(uname -r | tr '[:upper:]' '[:lower:]')
   if [[ $kernel == *"microsoft"* ]]; then

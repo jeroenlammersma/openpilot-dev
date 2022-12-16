@@ -39,5 +39,6 @@ latest_log=${sorted_logs[0]}
 segment=${1:-0}
 
 # open log with plotjuggler, trunc segment from path (--#) and concat $segment
-export PIPENV_PIPFILE="$OPENPILOT_PATH/Pipfile"
-pipenv run python "$OPENPILOT_PATH"/tools/plotjuggler/juggle.py "${latest_log%"--"*}--$segment/rlog"
+export PIPENV_PIPFILE="$OPENPILOT_PATH/Pipfile"                                                         # REMOVE IF OPENPILOT UPDATED TO USE POETRY
+# poetry run python "$OPENPILOT_PATH"/tools/plotjuggler/juggle.py "${latest_log%"--"*}--$segment/rlog"  # UNCOMMENT IF OPENPILOT UPDATED TO USE POETRY
+pipenv run python "$OPENPILOT_PATH"/tools/plotjuggler/juggle.py "${latest_log%"--"*}--$segment/rlog"    # REMOVE IF OPENPILOT UPDATED TO USE POETRY

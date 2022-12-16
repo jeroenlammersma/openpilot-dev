@@ -23,15 +23,15 @@ scratch=$(mktemp -d -t tmp.XXXXXXXXXX)
 trap egress EXIT
 
 SETUP_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-ROOT="$(cd "$SETUP_DIR"/../ && pwd)"
+ROOT="$( cd "$SETUP_DIR"/../ && pwd )"
 
 # load default config
 source "$SETUP_DIR/config.defaults"
 # load custom config, if exists
 if [ -f "$SETUP_DIR/config" ]; then source "$SETUP_DIR/config"; fi
-# load helpers
-source "$SETUP_DIR/lib/print_helpers.sh"
+# load helper functions
 source "$SETUP_DIR/lib/helpers.sh"
+source "$SETUP_DIR/lib/print_helpers.sh"
 
 # set setup and paths
 OPENPILOT_SETUP=1
@@ -108,15 +108,15 @@ print_done 1
 # start tasks
 _n_tasks=0
 
-# setup dev env
-if [ -n "$DO_DEV_ENV_SETUP" ]; then
-  source "$SETUP_DIR/dev-env/dev_env_setup.sh"
+# setup openpilot
+if [ -n "$DO_OPENPILOT_SETUP" ]; then
+  source "$SETUP_DIR/openpilot/openpilot_setup.sh"
   ((_n_tasks+=1))
 fi
 
-# install dev tools
-if [ -n "$DO_DEV_TOOLS_INSTALL" ]; then
-  source "$SETUP_DIR/tools/tools_install.sh"
+# setup dev env
+if [ -n "$DO_DEV_ENV_SETUP" ]; then
+  source "$SETUP_DIR/dev-env/dev_env_setup.sh"
   ((_n_tasks+=1))
 fi
 
@@ -126,9 +126,9 @@ if [ -n "$DO_CARLA_SETUP" ]; then
   ((_n_tasks+=1))
 fi
 
-# setup openpilot
-if [ -n "$DO_OPENPILOT_SETUP" ]; then
-  source "$SETUP_DIR/openpilot/openpilot_setup.sh"
+# install dev tools
+if [ -n "$DO_DEV_TOOLS_INSTALL" ]; then
+  source "$SETUP_DIR/tools/tools_install.sh"
   ((_n_tasks+=1))
 fi
 

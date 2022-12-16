@@ -1,0 +1,13 @@
+ControlLoss
+DynamicObjectCrossing
+FollowLeadingVehicle
+FollowLeadingVehicleWithObstacle
+ManeuverOppositeDirection
+NoSignalJunctionCrossing
+OppositeVehicleRunningRedLight
+OtherLeadingVehicle
+SignalizedJunctionLeftTurn
+SignalizedJunctionRightTurn
+StationaryObjectCrossing
+VehicleTurningLeft
+VehicleTurningRight

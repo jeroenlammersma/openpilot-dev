@@ -54,7 +54,7 @@ Directory Structure
         openpilot                     # Convenient scripts for openpilot
         setup                         # Set up the dev environment
         ├── carla                     # CARLA simulator setup
-        ├── dev-env                   # Pipenv setup
+        ├── dev-env                   # poetry setup
         ├── drivers                   # Utilities for drivers
         │   ├── nvidia-graphics       # Autoinstall recommended NVIDIA driver
         │   └── wifi-adapter-88x2bu   # Driver for Realtek Wi-Fi adapter (RTL88x2bu chipsets)

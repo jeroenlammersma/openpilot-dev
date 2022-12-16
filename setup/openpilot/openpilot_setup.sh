@@ -6,6 +6,7 @@ print_title "OPENPILOT"
 print_start "Setting up $OPENPILOT_REPO_OWNER/$OPENPILOT_REPO_NAME repository"
 if [ ! -d "$OPENPILOT_PATH" ]
 then
+  printf "%s\n" "Using branch: '$OPENILOT_REPO_BRANCH'"
   git clone "https://github.com/$OPENPILOT_REPO_OWNER/$OPENPILOT_REPO_NAME.git" "$OPENPILOT_PATH" \
             --recurse-submodules -j"$(nproc)" \
             ${OPENPILOT_REPO_BRANCH:+--branch "$OPENPILOT_REPO_BRANCH"}
@@ -22,22 +23,13 @@ print_done
 print_start "Setting up openpilot environment"
 obtain_sudo
 
-if ! command -v "pyenv" > /dev/null 2>&1 && [ -d "$HOME/.pyenv" ]; then
-  yellowprint "pyenv directory detected..."
-  echo "$HOME/.pyenv"
-  sleep 1
-  rm -rf "$HOME/.pyenv"
-  cyanprint "Directory deleted."
-  sleep 1
-  echo "Continuing setup..."
-  sleep 1
-fi
+check_for_existing_pyenv_root
 
 cd "$OPENPILOT_PATH"
-if ! tools/ubuntu_setup.sh; then  # first install pyenv... it will return with exit code 1
+if ! tools/ubuntu_setup.sh; then  # ubuntu setup exits if pyenv was not installed (now installed)
   source ~/.pyenvrc               # reload pyenvrc
   cd "$OPENPILOT_PATH"
-  tools/ubuntu_setup.sh           # then run ubuntu setup again to continue setup.
+  tools/ubuntu_setup.sh           # run ubuntu setup again to continue setup
 fi
 print_done
 
@@ -45,12 +37,14 @@ print_done
 obtain_sudo
 print_start "Building openpilot"
 cd "$OPENPILOT_PATH"
-pipenv run scons -j"$(nproc)"
+# poetry run scons -j"$(nproc)"                     # UNCOMMENT IF OPENPILOT UPDATED TO USE POETRY
+pipenv run scons -j"$(nproc)"                       # REMOVE IF OPENPILOT UPDATED TO USE POETRY
 print_done
 
 # install plotjuggler
 print_start "Installing plotjuggler"
-pipenv run tools/plotjuggler/juggle.py --install
+# poetry run tools/plotjuggler/juggle.py --install  # UNCOMMENT IF OPENPILOT UPDATED TO USE POETRY
+pipenv run tools/plotjuggler/juggle.py --install    # REMOVE IF OPENPILOT UPDATED TO USE POETRY
 print_done
 
 # create symlink to openpilot logs
